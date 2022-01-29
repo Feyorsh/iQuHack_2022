@@ -224,7 +224,7 @@ class Unit(object):
             'Move: {movement}\tCon: {constitution}\n'
             'Aid: {aid}\tAffin: {affinity}\n'
             'Weapon: {items.active}\n'
-            'Entangled with {entangled.name}'
+            #'Entangled with {entangled.name}'
             .format_map(self.__dict__)
         )
 

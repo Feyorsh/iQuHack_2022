@@ -565,6 +565,7 @@ class TileMap(room.Room):
         self.update_highlight()
 
     def entangle(self, parent=None, child=None):
+        print(f"Entangled {parent} with {child}!!!")
         if not parent:
             parent = self.curr_unit
         if not child:

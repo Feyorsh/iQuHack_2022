@@ -99,10 +99,9 @@ class ActionMenu(gui.Menu):
 
     #NEW
     def menu_entangle(self):
-        self.parent = map.Map
-        self.parent.entangle()
+        self.parent: map.Map
         if self.defending:
-            self.parent.attack(self.attacking, self.defending)
+            self.parent.entangle(self.attacking, self.defending)
         else:
             self.parent.add_child(EntangleSelect())
 
