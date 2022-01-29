@@ -198,6 +198,10 @@ class Unit(object):
         self.team         = None               # team
         self.coord        = None
         self.modified     = True
+
+        #NEW
+        self.entangled    = None # what other ally the unit is entangled with
+
         try:
             self.image = resources.load_sprite(self.name).convert_alpha()
             new_size = utils.resize_keep_ratio(self.image.get_size(), (200, 200))
@@ -219,7 +223,8 @@ class Unit(object):
             'Def: {defence}\tRes: {resistance}\n'
             'Move: {movement}\tCon: {constitution}\n'
             'Aid: {aid}\tAffin: {affinity}\n'
-            'Weapon: {items.active}'
+            'Weapon: {items.active}\n'
+            'Entangled with {entangled.name}'
             .format_map(self.__dict__)
         )
 
@@ -317,6 +322,8 @@ class Unit(object):
         elif critical:
             print("Triple attack")
             dmg *= 3
+            if enemy.entangled is not None:
+                collapse(enemy)
             enemy.inflict_damage(dmg)
             if self.weapon is not None:
                 self.weapon.use()
@@ -327,6 +334,10 @@ class Unit(object):
             if self.weapon is not None:
                 self.weapon.use()
             return 'hit', dmg
+
+    #NEW
+    def entangle(self, ally: 'Unit') -> Tuple[str, int]:
+
 
     def value(self) -> int:
         """
@@ -394,6 +405,7 @@ class Unit(object):
 
     def wait(self) -> None:
         self.played = True
+
 
 
 class Flying(Unit):

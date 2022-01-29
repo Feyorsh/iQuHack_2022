@@ -85,6 +85,12 @@ class ActionMenu(gui.Menu):
         self.visible = False
         self.parent.move_unit_undo()
 
+    #NEW
+    def menu_entangle(self):
+        self.parent = map.Map
+        self.parent.entangle()
+
+
     def handle_mousemotion(self, event):
         super().handle_mousemotion(event)
         return True  # prevent event propagation to parent
@@ -104,7 +110,11 @@ class ActionMenu(gui.Menu):
             (_("Attack"), lambda *_: self.menu_attack()),
             (_("Items"), lambda *_: self.menu_items()),
             (_("Wait"), lambda *_: self.menu_wait()),
+            #NEW
+            (_("Entangle"), lambda *_: self.menu_entangle())
         ] if len(self.parent.nearby_enemies()) > 0 else [
             (_("Items"), lambda *_: self.menu_items()),
             (_("Wait"), lambda *_: self.menu_wait()),
+            #NEW
+            (_("Entangle"), lambda *_: self.menu_entangle())
         ]
