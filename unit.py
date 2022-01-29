@@ -322,8 +322,9 @@ class Unit(object):
         elif critical:
             print("Triple attack")
             dmg *= 3
+            #NEW
             if enemy.entangled is not None:
-                collapse(enemy)
+                pass#collapse(enemy)
             enemy.inflict_damage(dmg)
             if self.weapon is not None:
                 self.weapon.use()
@@ -336,8 +337,12 @@ class Unit(object):
             return 'hit', dmg
 
     #NEW
-    def entangle(self, ally: 'Unit') -> Tuple[str, int]:
+    def entangle(self, event) -> Tuple[str, int]:
+        self.entangled = event
 
+        self.image = resources.load_sprite("Entangled").convert_alpha()
+        new_size = utils.resize_keep_ratio(self.image.get_size(), (200, 200))
+        self.image = pygame.transform.smoothscale(self.image, new_size)
 
     def value(self) -> int:
         """

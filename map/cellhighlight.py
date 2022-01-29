@@ -26,13 +26,15 @@ class CellHighlightLayer(tmx.SpriteLayer):
     def cell_rect_at(self, coord):
         return pygame.Rect(self.tilemap.pixel_at(*coord, False), self.tilemap.zoom_tile_size)
 
-    def update(self, selected=None, move=None, attack=None, played=None):
+    def update(self, selected=None, move=None, attack=None, entangle=None, played=None):
         if move is None:
             move = []
         if attack is None:
             attack = []
         if played is None:
             played = []
+        if entangle is None:
+            entangle = []
 
         self.empty()
 
@@ -50,6 +52,9 @@ class CellHighlightLayer(tmx.SpriteLayer):
 
         for coord in attack:
             self.add(CellHighlight(highlight_surfaces['attack'], self.cell_rect_at(coord)))
+
+        for coord in entangle:
+            self.add(CellHighlight(highlight_surfaces['entangle'], self.cell_rect_at(coord)))
 
         for coord in played:
             self.add(CellHighlight(highlight_surfaces['played'], self.cell_rect_at(coord)))

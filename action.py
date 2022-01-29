@@ -28,10 +28,10 @@ class Move(Action):
         return f"Move {self.who.name} to {self.where}"
 
 class Entangle(Action):
-    def __init__(self, bob: unit.Unit, alice: unit.Unit):
+    def __init__(self, parent: unit.Unit, child: unit.Unit):
         super().__init__()
-        self.bob: unit.Unit = bob
-        self.alice: unit.Unit = alice
+        self.parent: unit.Unit = parent
+        self.child: unit.Unit = child
 
     def __str__(self):
-        return f"Entangled {self.bob.name} with {self.alice.name}"
+        return f"Entangled {self.parent.name} with {self.child.name}"

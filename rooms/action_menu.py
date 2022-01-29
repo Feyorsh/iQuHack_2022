@@ -44,6 +44,41 @@ class AttackSelect(room.Room):
         m.invalidate()
         return True  # prevent event propagation to parent
 
+class EntangleSelect(room.Room):
+    def begin(self):
+        self.parent: map.Map
+        super().begin()
+        self.parent.prepare_entangle()
+
+    def handle_mousebuttondown(self, event):
+        self.parent: map.Map
+        # user must click on an allied unit
+        if event.button == 1 and self.parent.is_entangle_click(event.pos):
+            self.parent.prev_sel = self.parent.curr_sel
+            self.parent.curr_sel = self.parent.tilemap.index_at(*event.pos)
+            self.parent.entangle()
+            self.done = True
+        elif event.button == 3:
+            self.parent.move_unit_undo()
+            self.done = True
+        return True  # prevent event propagation to parent
+
+    def handle_keydown(self, event):
+        self.parent: map.Map
+        m: map.Map = self.parent
+        # user must choose an allied unit
+        m.cursor.update(event)
+        if event.key == pygame.K_SPACE and m.is_ally_cursor():
+            m.prev_sel = m.curr_sel
+            m.curr_sel = m.cursor.coord
+            m.entangle()
+            self.done = True
+        elif event.key == pygame.K_ESCAPE:
+            m.move_unit_undo()
+            self.done = True
+        m.invalidate()
+        return True  # prevent event propagation to parent
+
 
 class ActionMenu(gui.Menu):
     """
@@ -61,6 +96,15 @@ class ActionMenu(gui.Menu):
             self.parent.attack(self.attacking, self.defending)
         else:
             self.parent.add_child(AttackSelect())
+
+    #NEW
+    def menu_entangle(self):
+        self.parent = map.Map
+        self.parent.entangle()
+        if self.defending:
+            self.parent.attack(self.attacking, self.defending)
+        else:
+            self.parent.add_child(EntangleSelect())
 
     def menu_items(self):
         self.parent: map.Map
@@ -84,12 +128,6 @@ class ActionMenu(gui.Menu):
         self.parent: map.Map
         self.visible = False
         self.parent.move_unit_undo()
-
-    #NEW
-    def menu_entangle(self):
-        self.parent = map.Map
-        self.parent.entangle()
-
 
     def handle_mousemotion(self, event):
         super().handle_mousemotion(event)

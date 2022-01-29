@@ -26,6 +26,9 @@ from map.pathfinder import Pathfinder, Terrain, manhattan_path
 from map.unit import UnitSprite
 from room import Layout, LayoutParams, Background, BackgroundSize
 
+#NEW
+import quantum
+
 Coord = Tuple[int, int]
 
 
@@ -553,12 +556,47 @@ class TileMap(room.Room):
 
         self.reset_selection()
 
+    #NEW
+    def prepare_entangle(self, _unit=None):
+        if not _unit:
+            _unit = self.curr_unit
+        self.move_area = []
+        self.entangle_area = [unit.coord for unit in self.units_manager.active_team.units]
+        self.update_highlight()
+
+    def entangle(self, parent=None, child=None):
+        if not parent:
+            parent = self.curr_unit
+        if not child:
+            child = self.prev_unit
+
+        assert(parent != child)
+
+        # let the ~~battle~~ entanglement begin!
+        # change to arbitrary attribute select later
+        event = quantum.Quantum(parent, child, "coord")
+        parent.entangle(event)
+        child.entangle(event)
+
+        self.reset_selection()
+
+
     def is_attack_click(self, mouse_pos):
         coord = self.tilemap.index_at(*mouse_pos)
         return self.rect.collidepoint(mouse_pos) and coord in self.attack_area
 
+    #NEW
+    def is_entangle_click(self, mouse_pos):
+        coord = self.tilemap.index_at(*mouse_pos)
+        return self.rect.collidepoint(mouse_pos) and coord in self.entangle_area
+
+
     def is_enemy_cursor(self):
         return self.cursor.coord in self.attack_area
+
+    #NEW
+    def is_ally_cursor(self):
+        return self.cursor.coord in self.entangle_area
 
     def do_action(self, _action: action.Action) -> None:
         """
