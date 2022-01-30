@@ -64,6 +64,18 @@ class Quantum():
             # this may not work on your machine (python 10 feature), so ig you can change to if-elif as needed
             attr_list = []
             moving = False
+
+            if self.attribute == Attributes.position:
+                moving = True
+            elif Attributes.health:
+                    attr_list = ["health", "health_max", "health_prev"]
+
+            elif Attributes.level:
+                    attr_list = ["level", "level_prev", "experience", "exp_prev"]
+            else:
+                attr_list = [str(self.attribute.name)]
+
+            """
             match self.attribute:
                 case Attributes.position:
                     # coords are the weird ones. Try TileMap.move_unit() and sprite.reposition()
@@ -76,6 +88,7 @@ class Quantum():
                     attr_list = ["level", "level_prev", "experience", "exp_prev"]
                 case _:
                     attr_list = [str(self.attribute.name)]
+            """
 
             for attr in attr_list:
                 tmp = getattr(self.parent, attr)

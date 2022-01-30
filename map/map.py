@@ -6,6 +6,8 @@ import pygame
 import logging
 from typing import List, Tuple, Optional, Union
 
+import state as s
+
 import action
 import ai
 import display
@@ -549,8 +551,13 @@ class TileMap(room.Room):
         if not attacking:
             attacking = self.prev_unit
 
+        new_attacker = attacking
+        new_defender = defending
+        reset_attack = False
+        reset_defend = False
+
         if attacking.entangled is not None:
-            if coords := attacking.collapse(): # don't be fooled, this function is as dirty as it gets!
+            if (coords := attacking.collapse()) is not None: # don't be fooled, this function is as dirty as it gets!
                 # might have to move to an intermediate square
                 # yup!
                 print(f"Attacker is at ({coords[0]}) Sanity check: {attacking.coord == coords[0]}")
@@ -566,8 +573,12 @@ class TileMap(room.Room):
 
                 self.find_sprite(unit=attacking).reposition()
                 self.find_sprite(unit=other_unit).reposition()
+
+                new_attacker = other_unit
+                new_attacker.played = False
+                reset_attack = True
         if defending.entangled is not None:
-            if coords := defending.collapse(): # *chuckles* I'm in danger
+            if (coords := defending.collapse()) is not None: # *chuckles* I'm in danger
 
                 other_unit = self.get_unit(coords[1])
                 self.update_move_attack_area(defending)
@@ -579,12 +590,21 @@ class TileMap(room.Room):
                 self.find_sprite(unit=defending).reposition()
                 self.find_sprite(unit=other_unit).reposition()
 
+                new_defender = other_unit
+                new_defender.played = False
+                reset_defend = True
+
 
         assert(defending != attacking)
 
+        s.loaded_map.sprites_layer.update()
         # let the battle begin!
-        room.run_room(rooms.BattleAnimation(attacking, defending))
-
+        room.run_room(rooms.BattleAnimation(new_attacker, new_defender))
+        
+        if reset_attack:
+            attacking.played = True
+        if reset_defend:
+            defending.played = True
         self.reset_selection()
 
     #NEW

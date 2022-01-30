@@ -353,14 +353,16 @@ class Unit(object):
         s.loaded_map.sprites_layer.update()
 
     def collapse(self) -> Optional[Tuple[Coord, Coord]]:
+        coords = ()
         if moved := self.entangled.observe():
+            print("YES, IT MOVES!")
             if self.entangled.parent is self:
                 coords = (self.entangled.parent.coord, self.entangled.child.coord)
             else:
                 coords = (self.entangled.child.coord, self.entangled.parent.coord)
                 
         for unit in [self.entangled.parent, self.entangled.child]:
-            unit.image = self.trueImage
+            unit.image = unit.trueImage
             unit.entangled = None
             unit.modified = True
 
