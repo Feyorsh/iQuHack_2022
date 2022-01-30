@@ -23,7 +23,7 @@ class VictoryScreen(gui.LinearLayout):
         transparent = room.Background(color=c.TRANSPARENT, transparent=True)
         self.victory = gui.Label(_("%s wins!") % s.winner.name, f.MAIN_MENU, txt_color=s.winner.color,
                                  background=transparent)
-        self.thank_you = gui.Label(_("Thank you for playing Ice Emblem!"), f.MAIN_MENU, txt_color=c.ICE,
+        self.thank_you = gui.Label(_("Thank you for playing Ice Emblem (Quantum edition)!"), f.MAIN_MENU, txt_color=c.ICE,
                                    background=transparent)
         pygame.mixer.stop()
         resources.play_music('Victory Track.ogg', pos=1)

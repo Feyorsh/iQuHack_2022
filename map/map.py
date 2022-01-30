@@ -125,6 +125,7 @@ class TileMap(room.Room):
         self.curr_sel: Union[None, Coord] = None
         self.move_area: List[Coord] = []
         self.attack_area: List[Coord] = []
+        self.entangle_area: List[Coord] = []
 
         # Scroll speed
         self.vx, self.vy = 0, 0
@@ -302,7 +303,7 @@ class TileMap(room.Room):
 
     def update_highlight(self):
         played = [u.coord for u in self.units_manager.active_team.list_played()]
-        self.highlight_layer.update(self.curr_sel, self.move_area, self.attack_area, played)
+        self.highlight_layer.update(self.curr_sel, self.move_area, self.attack_area, self.entangle_area, played)
         self.invalidate()
 
     def area(self, center, radius, hole=0):
@@ -561,15 +562,16 @@ class TileMap(room.Room):
         if not _unit:
             _unit = self.curr_unit
         self.move_area = []
-        self.entangle_area = [unit.coord for unit in self.units_manager.active_team.units]
+        self.entangle_area = [unit.coord for unit in self.units_manager.active_team.units if unit != self.curr_unit]
         self.update_highlight()
 
     def entangle(self, parent=None, child=None):
-        print(f"Entangled {parent} with {child}!!!")
         if not parent:
             parent = self.curr_unit
         if not child:
             child = self.prev_unit
+
+        print(f"Entangled {parent.name} with {child.name}!!!")
 
         assert(parent != child)
 

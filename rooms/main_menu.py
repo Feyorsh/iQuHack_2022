@@ -20,7 +20,8 @@ class MainMenu(gui.LinearLayout):
                          layout=Layout(width=LayoutParams.FILL_PARENT, height=LayoutParams.FILL_PARENT), spacing=50)
         self.click_to_start = gui.Label(_("Click to Start"), f.MAIN_MENU, padding=10,
                                         txt_color=c.ICE, layout=Layout(gravity=Gravity.BOTTOM), die_when_done=False)
-        self.hmenu = gui.HorizontalMenu([(_("License"), self.show_license), (_("Settings"), self.settings_menu)],
+        #NEW
+        self.hmenu = gui.HorizontalMenu([(_("License"), self.show_license), (_("Settings"), self.settings_menu), (("OP"), self.show_chad)],
                                         f.SMALL, die_when_done=False, layout=Layout(gravity=Gravity.BOTTOMRIGHT))
         self.add_children(self.click_to_start, self.hmenu)
         self.bind_keys((pl.K_RETURN, pl.K_SPACE), self.show_map_menu)
@@ -35,6 +36,12 @@ class MainMenu(gui.LinearLayout):
         self.done = True
         self.next.next = self
 
+    #NEW
+    def show_chad(self, *_):
+        self.next = Chad()
+        self.done = True
+        self.next.next = self
+
     def settings_menu(self, *_):
         self.next = SettingsMenu()
         self.done = True
@@ -44,6 +51,12 @@ class MainMenu(gui.LinearLayout):
 class License(gui.Image):
     def __init__(self):
         super().__init__(resources.load_image('GNU GPL.jpg'), layout=Layout(gravity=Gravity.FILL),
+                         allowed_events=[pl.MOUSEBUTTONDOWN, pl.KEYDOWN], die_when_done=True)
+
+#NEW
+class Chad(gui.Image):
+    def __init__(self):
+        super().__init__(resources.load_image('gigachad.jpg'), layout=Layout(gravity=Gravity.FILL),
                          allowed_events=[pl.MOUSEBUTTONDOWN, pl.KEYDOWN], die_when_done=True)
 
 

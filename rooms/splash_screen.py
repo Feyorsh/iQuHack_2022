@@ -17,7 +17,7 @@ from .main_menu import MainMenu
 
 class SplashScreen(gui.Label):
     def __init__(self):
-        super().__init__("Elinvention\n" + _("PRESENTS"), MAIN_MENU, background=Background(color=BLACK),
+        super().__init__("iQuHack\n" + _("PRESENTS"), MAIN_MENU, background=Background(color=BLACK),
                          allowed_events=[MOUSEBUTTONDOWN, KEYDOWN])
 
     def begin(self):

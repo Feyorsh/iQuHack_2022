@@ -21,7 +21,7 @@ highlight = {
     'move': Color(0, 0, 255, 75),
     'attack': Color(255, 0, 0, 75),
     #NEW
-    'entangle': Color(0, 59, 111, 75),
+    'entangle': Color(255, 105, 180, 75),
     'played': Color(75, 75, 75, 150),
 }
 

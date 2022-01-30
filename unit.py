@@ -32,6 +32,9 @@ from typing import Tuple, List, Dict
 from gettext import gettext as _
 from abc import ABC, abstractmethod
 
+#NEW
+import state as s
+
 
 class Items(list):
     def __init__(self, active=None, *args):
@@ -337,12 +340,19 @@ class Unit(object):
             return 'hit', dmg
 
     #NEW
-    def entangle(self, event) -> Tuple[str, int]:
+    def entangle(self, event) -> None:
         self.entangled = event
 
-        self.image = resources.load_sprite("Entangled").convert_alpha()
-        new_size = utils.resize_keep_ratio(self.image.get_size(), (200, 200))
-        self.image = pygame.transform.smoothscale(self.image, new_size)
+        try:
+            self.image = resources.load_sprite("Entangled").convert_alpha()
+            new_size = utils.resize_keep_ratio(self.image.get_size(), (200, 200))
+            self.image = pygame.transform.smoothscale(self.image, new_size)
+        except FileNotFoundError:
+            logging.warning("ENTANGLEMENT SPRITE ERROR: Couldn't load %s! Loading default image", resources.sprite_path("Entangled"))
+            self.image = resources.load_sprite('no_image.png').convert_alpha()
+        self.modified = True
+        s.loaded_map.sprites_layer.update()
+        
 
     def value(self) -> int:
         """
