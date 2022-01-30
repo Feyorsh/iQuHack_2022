@@ -4,30 +4,30 @@ _Quantum Emblem_
 *What is "Quantum Emblem"?*
 ---------------
 
-Quantum Emblem is a strategy game which aims to be a make players understand the logic of entanglement event between the qubits and use it to entangle players as a advantage in fights.
-It is written in Python with Pygame.
+Quantum Emblem is a turn based RPG which aims to help players understand the logic of entanglement event between the qubits by adding an 'entanglement' mechanic the player can use to superimpose two allied units.
+It is written in Python with Pygame and uses Azure Quantum with an IonQ backend. Thanks guys!
 
 *Description:*
 --------
 
-The basic behind our game is to make players learn and use quantum entanglement. However, the twist here is the players will be using entanglement on each other, not qubits, and transport in the needed times of the fight!
+Quantum Emblem has gameplay very similar to classic Fire Emblem, with the inclusion of the 'entanglement' mechanic. This can be used to entangle the stats of two allied units --- attack strength, weapons, even position can be entangled! Players must get creative and adopt new strategies to win the fight.
 
 Quantum Emblem comes with lots of cool features:
 
-Freedom to entangle players.
+Freedom to entangle player units.
 Options to tweak the code design to include more i.e higher the scores of your attributes, higher chances for you to transport!
-Quantum Circuit ideas for future versions.
+Player created quantum circuits (not yet implemented)
 
 *Instructions:*
 ------
 
-There are two teams: Squadra Blue and Squadra Rossa
+There are two teams: Squadra Blue and Squadra Rossa:
 
 - ![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) `Squadra Blue` team is made up of boss, skeleton, and soldier.
 
 - ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `Squadra Rossa` team is made up of pirate tux, pirate, and ninja.
 
-Between the fights, units can select the button “Entangle” and choose an unit they want to switch places with. This way, they can teleport to the other units’ coordinate and survive from the attack!
+Between the fights, units can “Entangle” and choose an unit they want to switch places (or stats) with. This way, they can teleport to the other units’ coordinate to survive an attack or go on the offensive!
 
 *Screenshots:*
 -----------
