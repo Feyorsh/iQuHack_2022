@@ -4,8 +4,7 @@
 
 import pygame
 import logging
-from typing import List, Tuple, Optional
-from typing import Union
+from typing import List, Tuple, Optional, Union
 
 import action
 import ai
@@ -551,9 +550,35 @@ class TileMap(room.Room):
             attacking = self.prev_unit
 
         if attacking.entangled is not None:
-            attacking.collapse()
+            if coords := attacking.collapse(): # don't be fooled, this function is as dirty as it gets!
+                # might have to move to an intermediate square
+                # yup!
+                print(f"Attacker is at ({coords[0]}) Sanity check: {attacking.coord == coords[0]}")
+                other_unit = self.get_unit(coords[1])
+                print(f"Defender is at ({coords[1]}) Sanity check: {other_unit.coord == coords[1]}")
+                self.update_move_attack_area(attacking)
+
+
+                print(f"Attempting to move attacker to ({self.move_area[0]})")
+                self.move_unit(attacking, self.move_area[0]) # erm... might want to double check to make sure the intermediary tile is a bit safer
+                self.move_unit(other_unit, coords[0])
+                self.move_unit(attacking, coords[1])
+
+                self.find_sprite(unit=attacking).reposition()
+                self.find_sprite(unit=other_unit).reposition()
         if defending.entangled is not None:
-            defending.collapse()
+            if coords := defending.collapse(): # *chuckles* I'm in danger
+
+                other_unit = self.get_unit(coords[1])
+                self.update_move_attack_area(defending)
+
+                self.move_unit(defending, self.move_area[0])
+                self.move_unit(other_unit, coords[0])
+                self.move_unit(defending, coords[1])
+
+                self.find_sprite(unit=defending).reposition()
+                self.find_sprite(unit=other_unit).reposition()
+
 
         assert(defending != attacking)
 
@@ -572,9 +597,9 @@ class TileMap(room.Room):
 
     def entangle(self, parent=None, child=None):
         if not parent:
-            parent = self.curr_unit
+            parent = self.prev_unit
         if not child:
-            child = self.prev_unit
+            child = self.curr_unit
 
         print(f"Entangled {parent.name} with {child.name}!!!")
 
@@ -582,9 +607,11 @@ class TileMap(room.Room):
 
         # let the ~~battle~~ entanglement begin!
         # change to arbitrary attribute select later
-        event = quantum.Quantum(parent, child, "coord")
+        event = quantum.Quantum(parent, child, quantum.Attributes.position)
         parent.entangle(event)
         child.entangle(event)
+
+        parent.played = True
 
         self.reset_selection()
 

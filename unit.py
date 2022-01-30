@@ -19,7 +19,6 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 
-
 import pygame
 import random
 import logging
@@ -29,12 +28,14 @@ import utils
 import resources
 import string
 
-from typing import Tuple, List, Dict
+from typing import Tuple, List, Dict, Optional
 from gettext import gettext as _
 from abc import ABC, abstractmethod
 
 #NEW
 import state as s
+
+Coord = Tuple[int, int]
 
 
 class Items(list):
@@ -172,7 +173,8 @@ class Unit(object):
     """
     This class is a unit with stats
     """
-    trueImage = None
+    entangled_image = None
+    isEntangled = False
 
     ALLOWED_TERRAINS = ['earth']
 
@@ -347,20 +349,29 @@ class Unit(object):
             logging.warning("ENTANGLEMENT SPRITE ERROR: Couldn't load %s! Loading default image", resources.sprite_path("Entangled"))
             self.image = resources.load_sprite('no_image.png').convert_alpha()
         self.modified = True
+        Unit.isEntangled = True
         s.loaded_map.sprites_layer.update()
 
-    def collapse(self) -> None:
-        self.entangled.observe()
-        self.image = self.trueImage
-        if self is self.entangled.parent:
-            self.entangled.child.image = self.entangled.child.trueImage
-        else:
-            self.entangled.parent.image = self.entangled.parent.trueImage
+    def collapse(self) -> Optional[Tuple[Coord, Coord]]:
+        if moved := self.entangled.observe():
+            if self.entangled.parent is self:
+                coords = (self.entangled.parent.coord, self.entangled.child.coord)
+            else:
+                coords = (self.entangled.child.coord, self.entangled.parent.coord)
+                
+        for unit in [self.entangled.parent, self.entangled.child]:
+            unit.image = self.trueImage
+            unit.entangled = None
+            unit.modified = True
 
-        self.entangled = None
-        self.modified = True
+        Unit.isEntangled = False
         s.loaded_map.sprites_layer.update()
-        
+
+        if moved:
+            # first coords are the collapsing unit's
+            return coords
+
+   
 
     def value(self) -> int:
         """

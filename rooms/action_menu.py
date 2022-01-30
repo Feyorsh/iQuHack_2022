@@ -3,6 +3,7 @@ import pygame
 import room
 import gui
 import map
+import unit
 
 from fonts import SMALL
 
@@ -143,15 +144,8 @@ class ActionMenu(gui.Menu):
     def begin(self):
         self.parent: map.Map
         super().begin()
-        self.menu_entries = [
-            (_("Attack"), lambda *_: self.menu_attack()),
+        #NEW
+        self.menu_entries = ([(_("Attack"), lambda *_: self.menu_attack())] if len(self.parent.nearby_enemies()) > 0 else []) + [
             (_("Items"), lambda *_: self.menu_items()),
-            (_("Wait"), lambda *_: self.menu_wait()),
-            #NEW
-            (_("Entangle"), lambda *_: self.menu_entangle())
-        ] if len(self.parent.nearby_enemies()) > 0 else [
-            (_("Items"), lambda *_: self.menu_items()),
-            (_("Wait"), lambda *_: self.menu_wait()),
-            #NEW
-            (_("Entangle"), lambda *_: self.menu_entangle())
-        ]
+            (_("Wait"), lambda *_: self.menu_wait())
+        ] + ([(_("Entangle"), lambda *_: self.menu_entangle())] if not unit.Unit.isEntangled else [])
