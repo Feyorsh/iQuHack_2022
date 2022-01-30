@@ -38,7 +38,7 @@ Between the fights, units can select the button “Entangle” and choose an uni
 *Link to our presentation:*
 -------
 
-https://www.overleaf.com/project/61f6416a9ee48933fd6a6320
+https://github.com/Borris-the-real-OG/iQuHack_2022/blob/master/iQuHACK2022_1.pdf
 
 *Our team's personal experience at MIT iQuHACK 2022:*
 ---------
