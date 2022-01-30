@@ -16,7 +16,7 @@ from rooms.map_menu import MapMenu
 class MainMenu(gui.LinearLayout):
     def __init__(self):
         super().__init__(allowed_events=[pl.MOUSEMOTION, pl.MOUSEBUTTONDOWN, pl.KEYDOWN],
-                         background=Background(color=c.BLACK, image=resources.load_image('saber.png'), size=BackgroundSize.COVER),
+                         background=Background(color=c.BLACK, image=resources.load_image('saber.png'), size=BackgroundSize.CONTAIN),
                          layout=Layout(width=LayoutParams.FILL_PARENT, height=LayoutParams.FILL_PARENT), spacing=50)
         self.click_to_start = gui.Label(_("Click to Start"), f.MAIN_MENU, padding=10,
                                         txt_color=c.ICE, layout=Layout(gravity=Gravity.BOTTOM), die_when_done=False)

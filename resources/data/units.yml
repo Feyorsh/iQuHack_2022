@@ -108,5 +108,149 @@
     wrank:
         Sword: E
 
+- Unit:
+    name: Giorno
+    health: 250
+    level: 10
+    experience: 0
+    strength: 20
+    skill: 20
+    speed: 20
+    luck: 20
+    defence: 20
+    resistance: 20
+    movement: 20
+    constitution: 20
+    aid: 20
+    affinity: "Anima"
+    wrank:
+        Bow: C
+
+- Unit:
+    name: Coco Jumbo
+    health: 10
+    level: 1
+    experience: 0
+    strength: 4
+    skill: 3
+    speed: 3
+    luck: 2
+    defence: 7
+    resistance: 3
+    movement: 3
+    constitution: 2
+    aid: 4
+    affinity: "Anima"
+    wrank:
+        Bow: E
+
+- Unit:
+    name: Bucciarati
+    health: 20
+    level: 2
+    experience: 0
+    strength: 4
+    skill: 3
+    speed: 3
+    luck: 2
+    defence: 7
+    resistance: 3
+    movement: 3
+    constitution: 2
+    aid: 4
+    affinity: "Anima"
+    wrank:
+        Bow: E
+
+- Unit:
+    name: Polpo
+    health: 20
+    level: 2
+    experience: 0
+    strength: 4
+    skill: 3
+    speed: 3
+    luck: 2
+    defence: 7
+    resistance: 3
+    movement: 3
+    constitution: 2
+    aid: 4
+    affinity: "Anima"
+    wrank:
+        Bow: E
+
+- Unit:
+    name: Ghiaccio
+    health: 20
+    level: 2
+    experience: 0
+    strength: 4
+    skill: 3
+    speed: 3
+    luck: 2
+    defence: 7
+    resistance: 3
+    movement: 3
+    constitution: 2
+    aid: 4
+    affinity: "Anima"
+    wrank:
+        Bow: E
+
+- Unit:
+    name: Diavolo
+    health: 100
+    level: 4
+    experience: 0
+    strength: 10
+    skill: 10
+    speed: 10
+    luck: 10
+    defence: 10
+    resistance: 10
+    movement: 10
+    constitution: 10
+    aid: 10
+    affinity: "Anima"
+    wrank:
+        Sword: C
+
+- Unit:
+    name: Pesci
+    health: 20
+    level: 2
+    experience: 0
+    strength: 4
+    skill: 3
+    speed: 3
+    luck: 2
+    defence: 7
+    resistance: 3
+    movement: 3
+    constitution: 2
+    aid: 4
+    affinity: "Anima"
+    wrank:
+        Bow: E
+
+- Unit:
+    name: Risotto
+    health: 20
+    level: 2
+    experience: 0
+    strength: 4
+    skill: 3
+    speed: 3
+    luck: 2
+    defence: 7
+    resistance: 3
+    movement: 3
+    constitution: 2
+    aid: 4
+    affinity: "Anima"
+    wrank:
+        Bow: E
+
 ...
 

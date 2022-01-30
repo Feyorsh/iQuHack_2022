@@ -215,7 +215,7 @@ class Unit(object):
             new_size = utils.resize_keep_ratio(self.trueImage.get_size(), (200, 200))
             self.trueImage = pygame.transform.smoothscale(self.trueImage, new_size)
         except FileNotFoundError:
-            logging.warning("Couldn't load %s! Loading default image", resources.sprite_path(self.trueImage))
+            logging.warning("Couldn't load %s! Loading default image", self.name)
             self.trueImage = resources.load_sprite('no_image.png').convert_alpha()
         self.image = self.trueImage
 

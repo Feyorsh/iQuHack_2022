@@ -1,23 +1,22 @@
-<!--UNFINISHED, will probably crash the game-->
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="17" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="10">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="15" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="10">
  <properties>
-  <property name="name" value="Default Map"/>
+  <property name="name" value="Jobro"/>
  </properties>
- <tileset firstgid="1" source="iQuHack/ice-emblem/resources/maps/Terrain.tsx"/>
- <layer id="1" name="base" width="17" height="12">
+ <tileset firstgid="1" source="Terrain.tsx"/>
+ <layer id="1" name="base" width="15" height="12">
   <data encoding="base64" compression="zlib">
-   eJyTYWRgkAFiaSgGsUkFMlQwoxaKyxgRbHSgyogQN2dEYHQz0PEiEszYiAcXAvFiIFYiYMYGPLgQqiaNEeIWXACmFhcGgSSofzLQ/ItuRh4ahpmxCM0MZEyOGeiYFDMW48DEhgexZuCLF2LMAABo9kMA
+   eJyTYWRgkAFiaSiWQcNKUFzLgIllSNCLDmBmlKGZvQgJqyLpNWdEYGxuIVbvRgbcuBCqVwmH3g0MuDFMbxojxG50AFODC4P0JkHdnYHmL5jePDSMSy8yJkUvOiZG72IcmBj/4tNLKJxx6QUAW/5MEg==
   </data>
  </layer>
- <layer id="2" name="decorations2" width="17" height="12">
+ <layer id="2" name="decorations2" width="15" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQxm4D7QDRhgAAGlAAEg=
+   eJxjYBgFgwm4D7QDhjgAAFuQAEg=
   </data>
  </layer>
- <layer id="3" name="decorations" width="17" height="12">
+ <layer id="3" name="decorations" width="15" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYIAARyYGBmcmCPsfA3mgEai/mUwzHIHYGYgXAvUvZsKupgZKmzFil1cGYiUgdkLCyiSa0YQHMxNpBj6QCKXnALEcEIcBzQhHwsjAF4j90LA/khmHkczBBriAOBeLeD7UDEagfSpAnA41Zy4SRgb4zHCEmtEOZHegYWLNAAEXoBmuWDAy6AXiPjTcj2QGOUALShNrBgCX+yIQ
+   eJxjYIAARyYGBmcmBgywm5GBoQbKrmDElAeBRqC+ZgJ6xYBscSTsCBRzBuKFQH2LoXoTQe4AyjkB8WEGhF4zNHuVgVgJiJ2QsDKSvCIjbr1NeDAzAb34QCJU7xwgLQfEYUB2OBIGAV8g9kPD/kj+BvkZph8EyqD6uIA4F4ud+VC9IKACVJsO1T8XCTMQqbcdSHegYWL0ugD1umLBINALxH1ouB9JLylAC0oT0gsAQ4Ul4A==
   </data>
  </layer>
  <objectgroup color="#0000ff" id="4" name="Gangstars">
@@ -29,17 +28,17 @@
   </properties>
   <object id="3" name="Bucciarati" type="unit" x="66.5" y="297.5" width="16" height="16">
    <properties>
-    <property name="weapon" value="Nosferatu"/>
+    <property name="weapon" value="Bronze Bow"/>
    </properties>
   </object>
   <object id="7" name="Coco Jumbo" type="unit" x="391" y="136" width="16" height="16">
    <properties>
-    <property name="weapon" value="Nosferatu"/>
+    <property name="weapon" value="Bronze Bow"/>
    </properties>
   </object>
   <object id="5" name="Giorno" type="unit" x="39.5" y="104.5" width="16" height="16">
    <properties>
-    <property name="weapon" value="Long Bow"/>
+    <property name="weapon" value="Gold Experience"/>
    </properties>
   </object>
  </objectgroup>
@@ -53,7 +52,7 @@
   </properties>
   <object id="1" name="Risotto" type="unit" x="423" y="327.5" width="16" height="16">
    <properties>
-    <property name="weapon" value="Stuzzicadenti"/>
+    <property name="weapon" value="Bronze Bow"/>
    </properties>
   </object>
   <object id="2" name="Pesci" type="unit" x="68.5" y="233" width="16" height="16">
@@ -63,17 +62,17 @@
   </object>
   <object id="6" name="Diavolo" type="unit" x="455.743" y="71.5646" width="16" height="16">
    <properties>
-    <property name="weapon" value="Knife"/>
+    <property name="weapon" value="King Crimson"/>
    </properties>
   </object>
   <object id="8" name="Ghiaccio" type="unit" x="296.243" y="328.565" width="16" height="16">
    <properties>
-    <property name="weapon" value="Knife"/>
+    <property name="weapon" value="Bronze Bow"/>
    </properties>
   </object>
   <object id="9" name="Polpo" type="unit" x="167.743" y="296.065" width="16" height="16">
    <properties>
-    <property name="weapon" value="Knife"/>
+    <property name="weapon" value="Bronze Bow"/>
    </properties>
   </object>
  </objectgroup>

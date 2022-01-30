@@ -45,6 +45,21 @@
     experience: 15
     effective:
 
+- Sword:
+    name: King Crimson
+    rank: C
+    might: 8
+    weight: 11
+    hit: 90
+    critical: 5
+    range:
+        min: 1
+        max: 1
+    uses: 20
+    worth: 150
+    experience: 15
+    effective:
+
 - Bow:
     name: Bronze Bow
     rank: E
@@ -66,6 +81,21 @@
     might: 5
     weight: 7
     hit: 90
+    critical: 2
+    range:
+        min: 2
+        max: 3
+    uses: 20
+    worth: 500
+    experience: 20
+    effective:
+
+- Bow:
+    name: Gold Experience
+    rank: C
+    might: 10
+    weight: 7
+    hit: 500
     critical: 2
     range:
         min: 2
