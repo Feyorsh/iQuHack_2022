@@ -8,7 +8,7 @@ import gui
 import resources
 import fonts as f
 import colors as c
-from room import Layout, LayoutParams, Gravity, Background
+from room import BackgroundSize, Layout, LayoutParams, Gravity, Background
 
 from rooms.map_menu import MapMenu
 
@@ -16,7 +16,7 @@ from rooms.map_menu import MapMenu
 class MainMenu(gui.LinearLayout):
     def __init__(self):
         super().__init__(allowed_events=[pl.MOUSEMOTION, pl.MOUSEBUTTONDOWN, pl.KEYDOWN],
-                         background=Background(color=c.BLACK, image=resources.load_image('Ice Emblem.png')),
+                         background=Background(color=c.BLACK, image=resources.load_image('saber.png'), size=BackgroundSize.COVER),
                          layout=Layout(width=LayoutParams.FILL_PARENT, height=LayoutParams.FILL_PARENT), spacing=50)
         self.click_to_start = gui.Label(_("Click to Start"), f.MAIN_MENU, padding=10,
                                         txt_color=c.ICE, layout=Layout(gravity=Gravity.BOTTOM), die_when_done=False)

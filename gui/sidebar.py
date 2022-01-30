@@ -23,7 +23,7 @@ class Sidebar(gui.LinearLayout):
                                       callback=lambda *_: turn.end_turn())
         self.turn_label = gui.Label(_("{team} turn"), font)
         self.terrain_label = gui.Label(f'Terrain: {{0}}\n{_("Def")}: {{1}}\n{_("Avoid")}: {{2}}\n{_("Allowed")}: {{3}}', font)
-        self.unit_label = gui.Label('Unit: {0}\nHealth: {1}\nCan move on: {2}\nWeapon: {3}', font)
+        self.unit_label = gui.Label('Unit: {0}\nHealth: {1}\nCan move on: {2}\nWeapon: {3}\nEntangled:\n{4}', font)
         self.coord_label = gui.Label('X: {0} Y: {1}', font, layout=Layout(gravity=Gravity.BOTTOM))
         self.clock = gui.Clock(font, layout=Layout(gravity=Gravity.BOTTOM))
 
@@ -47,7 +47,15 @@ class Sidebar(gui.LinearLayout):
 
         if unit:
             weapon = unit.items.active
-            self.unit_label.format(unit.name, unit.condition, ', '.join(map(_, unit.ALLOWED_TERRAINS)), str(weapon) if weapon else _("No Weapon"))
+            #NEW
+            tmp_str = "N/A"
+            if unit.entangled is not None:
+                if unit is unit.entangled.parent:
+                    tmp_str = repr(unit.entangled.child)
+                elif unit is unit.entangled.child:
+                    tmp_str = repr(unit.entangled.parent)
+
+            self.unit_label.format(unit.name, unit.condition, ', '.join(map(_, unit.ALLOWED_TERRAINS)), str(weapon) if weapon else ("No Weapon"), tmp_str)
         else:
             self.unit_label.set_text("No unit")
 

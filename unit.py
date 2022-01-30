@@ -23,6 +23,7 @@
 import pygame
 import random
 import logging
+from quantum import Quantum
 
 import utils
 import resources
@@ -171,6 +172,7 @@ class Unit(object):
     """
     This class is a unit with stats
     """
+    trueImage = None
 
     ALLOWED_TERRAINS = ['earth']
 
@@ -203,33 +205,30 @@ class Unit(object):
         self.modified     = True
 
         #NEW
-        self.entangled    = None # what other ally the unit is entangled with
+        self.entangled: Quantum    = None # what other ally the unit is entangled with
+
 
         try:
-            self.image = resources.load_sprite(self.name).convert_alpha()
-            new_size = utils.resize_keep_ratio(self.image.get_size(), (200, 200))
-            self.image = pygame.transform.smoothscale(self.image, new_size)
+            self.trueImage = resources.load_sprite(self.name).convert_alpha()
+            new_size = utils.resize_keep_ratio(self.trueImage.get_size(), (200, 200))
+            self.trueImage = pygame.transform.smoothscale(self.trueImage, new_size)
         except FileNotFoundError:
-            logging.warning("Couldn't load %s! Loading default image", resources.sprite_path(self.name))
-            self.image = resources.load_sprite('no_image.png').convert_alpha()
+            logging.warning("Couldn't load %s! Loading default image", resources.sprite_path(self.trueImage))
+            self.trueImage = resources.load_sprite('no_image.png').convert_alpha()
+        self.image = self.trueImage
 
     def __repr__(self):
         return "<Unit %s at %s>" % (self.name, self.coord)
 
     def __str__(self):
-        return (
-            'Unit: "{name}"\n'
-            'HP: {health}/{health_max}\n'
-            'LV: {level}\tEXP: {experience}\n'
-            'Str: {strength}\tSkill: {skill}\n'
-            'Spd: {speed}\tLuck: {luck}\n'
-            'Def: {defence}\tRes: {resistance}\n'
-            'Move: {movement}\tCon: {constitution}\n'
-            'Aid: {aid}\tAffin: {affinity}\n'
-            'Weapon: {items.active}\n'
-            #'Entangled with {entangled.name}'
-            .format_map(self.__dict__)
-        )
+        tmp_str = ""
+        if self.entangled is not None:
+            if self is self.entangled.parent:
+                tmp_str = f"Entangled with {repr(self.entangled.child)}"
+            elif self is self.entangled.child:
+                tmp_str = f"Entangled with {repr(self.entangled.parent)}"
+
+        return ('Unit: "{name}"\nHP: {health}/{health_max}\nLV: {level}\tEXP: {experience}\nStr: {strength}\tSkill: {skill}\nSpd: {speed}\tLuck: {luck}\nDef: {defence}\tRes: {resistance}\nMove: {movement}\tCon: {constitution}\nAid: {aid}\tAffin: {affinity}\nWeapon: {items.active}\n'+tmp_str).format_map(self.__dict__)
 
     @property
     def weapon(self):
@@ -325,9 +324,6 @@ class Unit(object):
         elif critical:
             print("Triple attack")
             dmg *= 3
-            #NEW
-            if enemy.entangled is not None:
-                pass#collapse(enemy)
             enemy.inflict_damage(dmg)
             if self.weapon is not None:
                 self.weapon.use()
@@ -343,13 +339,25 @@ class Unit(object):
     def entangle(self, event) -> None:
         self.entangled = event
 
-        try:
+        try: #todo: move this to a static variable of some sort
             self.image = resources.load_sprite("Entangled").convert_alpha()
             new_size = utils.resize_keep_ratio(self.image.get_size(), (200, 200))
             self.image = pygame.transform.smoothscale(self.image, new_size)
         except FileNotFoundError:
             logging.warning("ENTANGLEMENT SPRITE ERROR: Couldn't load %s! Loading default image", resources.sprite_path("Entangled"))
             self.image = resources.load_sprite('no_image.png').convert_alpha()
+        self.modified = True
+        s.loaded_map.sprites_layer.update()
+
+    def collapse(self) -> None:
+        self.entangled.observe()
+        self.image = self.trueImage
+        if self is self.entangled.parent:
+            self.entangled.child.image = self.entangled.child.trueImage
+        else:
+            self.entangled.parent.image = self.entangled.parent.trueImage
+
+        self.entangled = None
         self.modified = True
         s.loaded_map.sprites_layer.update()
         

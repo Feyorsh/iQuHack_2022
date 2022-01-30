@@ -550,6 +550,11 @@ class TileMap(room.Room):
         if not attacking:
             attacking = self.prev_unit
 
+        if attacking.entangled is not None:
+            attacking.collapse()
+        if defending.entangled is not None:
+            defending.collapse()
+
         assert(defending != attacking)
 
         # let the battle begin!

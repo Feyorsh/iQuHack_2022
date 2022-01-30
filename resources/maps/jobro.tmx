@@ -1,0 +1,80 @@
+<!--UNFINISHED, will probably crash the game-->
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="17" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="10">
+ <properties>
+  <property name="name" value="Default Map"/>
+ </properties>
+ <tileset firstgid="1" source="iQuHack/ice-emblem/resources/maps/Terrain.tsx"/>
+ <layer id="1" name="base" width="17" height="12">
+  <data encoding="base64" compression="zlib">
+   eJyTYWRgkAFiaSgGsUkFMlQwoxaKyxgRbHSgyogQN2dEYHQz0PEiEszYiAcXAvFiIFYiYMYGPLgQqiaNEeIWXACmFhcGgSSofzLQ/ItuRh4ahpmxCM0MZEyOGeiYFDMW48DEhgexZuCLF2LMAABo9kMA
+  </data>
+ </layer>
+ <layer id="2" name="decorations2" width="17" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQxm4D7QDRhgAAGlAAEg=
+  </data>
+ </layer>
+ <layer id="3" name="decorations" width="17" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYIAARyYGBmcmCPsfA3mgEai/mUwzHIHYGYgXAvUvZsKupgZKmzFil1cGYiUgdkLCyiSa0YQHMxNpBj6QCKXnALEcEIcBzQhHwsjAF4j90LA/khmHkczBBriAOBeLeD7UDEagfSpAnA41Zy4SRgb4zHCEmtEOZHegYWLNAAEXoBmuWDAy6AXiPjTcj2QGOUALShNrBgCX+yIQ
+  </data>
+ </layer>
+ <objectgroup color="#0000ff" id="4" name="Gangstars">
+  <properties>
+   <property name="battle_music" value="The Last Encounter Short Loop.ogg"/>
+   <property name="boss" value="Boss"/>
+   <property name="map_music" value="Ireland's Coast - Video Game.ogg"/>
+   <property name="relation" value="20"/>
+  </properties>
+  <object id="3" name="Bucciarati" type="unit" x="66.5" y="297.5" width="16" height="16">
+   <properties>
+    <property name="weapon" value="Nosferatu"/>
+   </properties>
+  </object>
+  <object id="7" name="Coco Jumbo" type="unit" x="391" y="136" width="16" height="16">
+   <properties>
+    <property name="weapon" value="Nosferatu"/>
+   </properties>
+  </object>
+  <object id="5" name="Giorno" type="unit" x="39.5" y="104.5" width="16" height="16">
+   <properties>
+    <property name="weapon" value="Long Bow"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff0000" id="5" name="Passione">
+  <properties>
+   <property name="AI" value=""/>
+   <property name="battle_music" value="The Last Encounter Short Loop.ogg"/>
+   <property name="boss" value="Pirate Tux"/>
+   <property name="map_music" value="Dark Descent.ogg"/>
+   <property name="relation" value="10"/>
+  </properties>
+  <object id="1" name="Risotto" type="unit" x="423" y="327.5" width="16" height="16">
+   <properties>
+    <property name="weapon" value="Stuzzicadenti"/>
+   </properties>
+  </object>
+  <object id="2" name="Pesci" type="unit" x="68.5" y="233" width="16" height="16">
+   <properties>
+    <property name="weapon" value="Bronze Bow"/>
+   </properties>
+  </object>
+  <object id="6" name="Diavolo" type="unit" x="455.743" y="71.5646" width="16" height="16">
+   <properties>
+    <property name="weapon" value="Knife"/>
+   </properties>
+  </object>
+  <object id="8" name="Ghiaccio" type="unit" x="296.243" y="328.565" width="16" height="16">
+   <properties>
+    <property name="weapon" value="Knife"/>
+   </properties>
+  </object>
+  <object id="9" name="Polpo" type="unit" x="167.743" y="296.065" width="16" height="16">
+   <properties>
+    <property name="weapon" value="Knife"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
